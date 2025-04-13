@@ -14,8 +14,10 @@ in
       owner = "dsully";
       repo = pname;
       rev = version;
+      hash = "sha256-PFD6gOQAxgwN3HfjjUNDoyCK1Ttjiva0W398qV5Ov2g=";
     };
 
+    cargoHash = "sha256-cBLW7vy87KFJk3Lmd2K+Oj85mHvb2kRM506OextIU98=";
     useFetchCargoVendor = true;
 
     meta = {
