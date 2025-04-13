@@ -11,6 +11,7 @@
   outputs = {
     nixpkgs,
     rust-overlay,
+    ...
   }: let
     forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
   in {
