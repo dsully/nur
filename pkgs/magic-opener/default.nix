@@ -10,6 +10,9 @@ in
     inherit pname;
     inherit version;
 
+    # Enable nightly features for Rust compiler
+    RUSTC_BOOTSTRAP = 1;
+
     src = fetchFromGitHub {
       owner = "dsully";
       repo = pname;
