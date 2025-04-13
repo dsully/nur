@@ -8,7 +8,14 @@
 #
 # then your CI will be able to build and cache only those packages for
 # which this is possible.
-{pkgs ? import <nixpkgs> {}}:
+{
+  pkgs ?
+    import <nixpkgs> {
+      overlays = [
+        (import (fetchTarball "https://github.com/oxalica/rust-overlay/archive/master.tar.gz"))
+      ];
+    },
+}:
 with builtins; let
   isReserved = n: n == "lib" || n == "overlays" || n == "modules";
   isDerivation = p: isAttrs p && p ? type && p.type == "derivation";

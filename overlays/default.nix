@@ -1,3 +1,5 @@
 {
-  rust-overlay = import ./rust-overlay.nix;
+  # Add your overlays here
+  #
+  # my-overlay = import ./my-overlay;
 }

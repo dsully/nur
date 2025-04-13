@@ -7,8 +7,7 @@
   version = "0.0.5";
 in
   rustPlatform.buildRustPackage rec {
-    inherit pname;
-    inherit version;
+    inherit pname version;
 
     src = fetchFromGitHub {
       owner = "dsully";
