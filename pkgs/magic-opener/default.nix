@@ -6,7 +6,7 @@
   pname = "magic-opener";
   version = "0.0.5";
 in
-  rustPlatform.buildRustPackage rec {
+  rustPlatform.buildRustPackage {
     inherit pname version;
 
     src = fetchFromGitHub {
