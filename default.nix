@@ -9,8 +9,5 @@
   # The `lib`, `modules`, and `overlays` names are special
   # lib = import ./lib {inherit pkgs;}; # functions
   # modules = import ./modules; # NixOS modules
-  # overlays = import ./overlays; # nixpkgs overlays
-
-  lolcate = pkgs.callPackage ./pkgs/lolcate-rs {};
-  magic-opener = pkgs.callPackage ./pkgs/magic-opener {};
+  overlays = import ./overlays; # nixpkgs overlays
 }
