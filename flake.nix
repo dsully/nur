@@ -9,17 +9,20 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
-    rust-overlay,
     ...
   }: let
     forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
   in {
     packages = forAllSystems (system:
       import ./default.nix {
-        overlays = [rust-overlay.overlays.default];
-
-        pkgs = import nixpkgs {inherit system;};
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [self.overlays.default];
+        };
       });
+
+    overlays.default = import ./overlays;
   };
 }
