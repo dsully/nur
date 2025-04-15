@@ -7,7 +7,7 @@
   stdenv,
   darwin,
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "reading-list-to-pinboard-rs";
   version = "unstable-2025-02-05";
 
@@ -43,7 +43,6 @@ rustPlatform.buildRustPackage rec {
     description = "A simple rust project to upload Safari Reading List links to pinboard or raindrop";
     homepage = "https://github.com/schwa/reading-list-to-pinboard-rs";
     license = lib.licenses.mit;
-    maintainers = with lib.maintainers; [];
     mainProgram = "reading-list-to-pinboard-rs";
   };
 }
