@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/apple/pkl-lsp/releases/download/${version}/${pname}-${version}.jar";
-    sha256 = "sha256-1sdiwrqapyivp4q4qda2qs6spmch2kxvn94ha35msj6d1jxf6jsz";
+    sha256 = "sha256-5f4be3ba0ccd485dcb509024bbfb1490d5ab8dc642354c30b93bfaab70e6b1e9";
   };
 
   nativeBuildInputs = [makeWrapper];
