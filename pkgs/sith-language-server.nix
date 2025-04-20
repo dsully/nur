@@ -13,10 +13,10 @@ rustPlatform.buildRustPackage rec {
     owner = "LaBatata101";
     repo = "sith-language-server";
     rev = version;
-    hash = "sha256-b9b0rgpTr8wXTCOcUhv8a1U++ebBWMaeiuIArv4m0PI=";
+    hash = "sha256-7y/kw58nRwCY2NUBGub2wxI6e4NoBSPuNWqekQYVHxw=";
   };
 
-  cargoHash = "sha256-iukhQf4JfNLrNbuv9A6W+A6v9TDunfDzb3eEiI+l29U=";
+  cargoHash = "sha256-Bf+Oz5HV1BhbCMqRSMgjUcF/oYjuDh+GkU6PPOIZmhw=";
   useFetchCargoVendor = true;
 
   nativeBuildInputs = [
