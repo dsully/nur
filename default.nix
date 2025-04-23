@@ -10,4 +10,31 @@
   lib = import ./lib {inherit pkgs;}; # functions
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
+
+  apple-photos-export = pkgs.callPackage ./pkgs/apple-photos-export.nix {};
+  autorebase = pkgs.callPackage ./pkgs/autorebase.nix {};
+  codesort = pkgs.callPackage ./pkgs/codesort.nix {};
+  curlconverter = pkgs.callPackage ./pkgs/curlconverter.nix {};
+  devmoji-log = pkgs.callPackage ./pkgs/devmoji-log.nix {};
+  dirstat-rs = pkgs.callPackage ./pkgs/dirstat-rs.nix {};
+  feluda = pkgs.callPackage ./pkgs/feluda.nix {};
+  geil = pkgs.callPackage ./pkgs/geil.nix {};
+  ghostty-ls = pkgs.callPackage ./pkgs/ghostty-ls.nix {};
+  git-ai-commit = pkgs.callPackage ./pkgs/git-ai-commit.nix {};
+  git-trim = pkgs.callPackage ./pkgs/git-trim.nix {};
+  github-actions-languageserver = pkgs.callPackage ./pkgs/github-actions-languageserver.nix {};
+  lolcate-rs = pkgs.callPackage ./pkgs/lolcate-rs.nix {};
+  magic-opener = pkgs.callPackage ./pkgs/magic-opener.nix {};
+  mc = pkgs.callPackage ./pkgs/mc.nix {};
+  pkl-lsp = pkgs.callPackage ./pkgs/pkl-lsp.nix {};
+  pyproject-fmt = pkgs.callPackage ./pkgs/pyproject-fmt.nix {};
+  qlty = pkgs.callPackage ./pkgs/qlty.nix {};
+  reading-list-to-pinboard = pkgs.callPackage ./pkgs/reading-list-to-pinboard-rs {};
+  safari-rs = pkgs.callPackage ./pkgs/safari-rs.nix {};
+  sith-language-server = pkgs.callPackage ./pkgs/sith-language-server.nix {};
+  sphinx-lint = pkgs.callPackage ./pkgs/sphinx-lint.nix {};
+  toml-fmt-common = pkgs.callPackage ./pkgs/toml-fmt-common.nix {};
+  turbo-commit = pkgs.callPackage ./pkgs/turbo-commit.nix {};
+  werk = pkgs.callPackage ./pkgs/werk.nix {};
+  xmlformatter = pkgs.callPackage ./pkgs/xmlformatter.nix {};
 }
