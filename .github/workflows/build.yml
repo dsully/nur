@@ -12,9 +12,13 @@ on:
     - cron:  '51 2 * * *'
   workflow_dispatch:
 jobs:
-  tests:
+  build:
     strategy:
       matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+
         # Set this to notify the global nur package registry that changes are
         # available.
         #
@@ -35,9 +39,9 @@ jobs:
         cachixName:
           - dsully
         nixPath:
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixpkgs-unstable.tar.gz
-          - nixpkgs=https://github.com/NixOS/nixpkgs/archive/refs/heads/nixos-unstable.tar.gz
-    runs-on: ubuntu-latest
+          - nixpkgs=channel:nixpkgs-unstable
+          - nixpkgs=channel:nixos-unstable
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -69,7 +73,3 @@ jobs:
           -I $PWD
     - name: Build nix packages
       run: nix shell -f '<nixpkgs>' nix-build-uncached -c nix-build-uncached ci.nix -A cacheOutputs
-    - name: Trigger NUR update
-      # Don't replace <YOUR_REPO_NAME> here!
-      if: ${{ matrix.nurRepo != '<YOUR_REPO_NAME>' }}
-      run: curl -XPOST "https://nur-update.nix-community.org/update?repo=${{ matrix.nurRepo }}"
