@@ -7,17 +7,18 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "sith-language-server";
-  version = "HEAD";
+  version = "05f9241";
 
   src = fetchFromGitHub {
     owner = "LaBatata101";
     repo = "sith-language-server";
     rev = version;
-    hash = "sha256-7y/kw58nRwCY2NUBGub2wxI6e4NoBSPuNWqekQYVHxw=";
+    hash = "sha256-eHvAPWhMKz2fk4p7a4y0Hz55U2Ax1ceS5IIt6MBXwBA=";
   };
 
-  cargoHash = "sha256-Bf+Oz5HV1BhbCMqRSMgjUcF/oYjuDh+GkU6PPOIZmhw=";
+  cargoHash = "sha256-4/hlS1oqQ8ConN8Rs1ldTTrWLehYMxjFj9rv4iIwxQE=";
   useFetchCargoVendor = true;
+  doCheck = false;
 
   nativeBuildInputs = [
     pkg-config

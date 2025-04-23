@@ -5,7 +5,7 @@
 # Having pkgs default to <nixpkgs> is fine though, and it lets you use short
 # commands such as:
 #     nix-build -A mypackage
-{pkgs ? import <nixpkgs> {}, ...}: {
+{pkgs ? import <nixpkgs> {}, ...}: rec {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib {inherit pkgs;}; # functions
   modules = import ./modules; # NixOS modules
@@ -14,7 +14,7 @@
   apple-photos-export = pkgs.callPackage ./pkgs/apple-photos-export.nix {};
   autorebase = pkgs.callPackage ./pkgs/autorebase.nix {};
   codesort = pkgs.callPackage ./pkgs/codesort.nix {};
-  curlconverter = pkgs.callPackage ./pkgs/curlconverter.nix {};
+  # curlconverter = pkgs.callPackage ./pkgs/curlconverter.nix {};
   devmoji-log = pkgs.callPackage ./pkgs/devmoji-log.nix {};
   dirstat-rs = pkgs.callPackage ./pkgs/dirstat-rs.nix {};
   feluda = pkgs.callPackage ./pkgs/feluda.nix {};
@@ -25,10 +25,10 @@
   github-actions-languageserver = pkgs.callPackage ./pkgs/github-actions-languageserver.nix {};
   lolcate-rs = pkgs.callPackage ./pkgs/lolcate-rs.nix {};
   magic-opener = pkgs.callPackage ./pkgs/magic-opener.nix {};
-  mc = pkgs.callPackage ./pkgs/mc.nix {};
+  # mc = pkgs.callPackage ./pkgs/mc.nix {};
   pkl-lsp = pkgs.callPackage ./pkgs/pkl-lsp.nix {};
-  pyproject-fmt = pkgs.callPackage ./pkgs/pyproject-fmt.nix {};
-  qlty = pkgs.callPackage ./pkgs/qlty.nix {};
+  pyproject-fmt = pkgs.callPackage ./pkgs/pyproject-fmt.nix {inherit toml-fmt-common;};
+  # qlty = pkgs.callPackage ./pkgs/qlty.nix {};
   reading-list-to-pinboard = pkgs.callPackage ./pkgs/reading-list-to-pinboard-rs {};
   safari-rs = pkgs.callPackage ./pkgs/safari-rs.nix {};
   sith-language-server = pkgs.callPackage ./pkgs/sith-language-server.nix {};

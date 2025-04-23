@@ -5,7 +5,7 @@
   cargo,
   rustPlatform,
   rustc,
-  pkgs,
+  toml-fmt-common,
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "pyproject-fmt";
@@ -32,7 +32,7 @@ python3.pkgs.buildPythonApplication rec {
   ];
 
   dependencies = [
-    pkgs.toml-fmt-common
+    toml-fmt-common
   ];
 
   pythonImportsCheck = [

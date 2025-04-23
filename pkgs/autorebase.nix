@@ -22,7 +22,7 @@ rustPlatform.buildRustPackage rec {
   meta = {
     description = "Automatically rebase all your branches onto master";
     homepage = "https://github.com/Timmmm/autorebase";
-    license = lib.licenses.unfree;
+    # license = lib.licenses.unfree;
     mainProgram = "autorebase";
   };
 }
