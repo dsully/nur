@@ -36,5 +36,6 @@
   toml-fmt-common = pkgs.callPackage ./pkgs/toml-fmt-common.nix {};
   turbo-commit = pkgs.callPackage ./pkgs/turbo-commit.nix {};
   werk = pkgs.callPackage ./pkgs/werk.nix {};
+  xdg-open-svc = pkgs.callPackage ./pkgs/xdg-open-svc.nix {};
   xmlformatter = pkgs.callPackage ./pkgs/xmlformatter.nix {};
 }
