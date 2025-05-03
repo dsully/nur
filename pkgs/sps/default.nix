@@ -2,8 +2,8 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  openssl,
-  pkg-config,
+  pkgs,
+  stdenv,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "sps";
@@ -28,12 +28,16 @@ rustPlatform.buildRustPackage rec {
   doCheck = false;
 
   nativeBuildInputs = [
-    pkg-config
+    pkgs.pkg-config
   ];
 
-  buildInputs = [
-    openssl
-  ];
+  buildInputs =
+    [
+      pkgs.openssl
+    ]
+    ++ lib.optionals stdenv.isLinux [
+      pkgs.glib
+    ];
 
   meta = {
     description = "Rust based package manager for macOS";
