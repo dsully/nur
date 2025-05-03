@@ -36,6 +36,7 @@ rustPlatform.buildRustPackage rec {
       pkgs.openssl
     ]
     ++ lib.optionals stdenv.isLinux [
+      pkgs.gtk3
       pkgs.glib
     ];
 
