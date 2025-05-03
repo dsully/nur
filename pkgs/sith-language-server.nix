@@ -36,6 +36,6 @@ rustPlatform.buildRustPackage rec {
     description = "An experimental Python language server made in Rust";
     homepage = "https://github.com/LaBatata101/sith-language-server";
     license = lib.licenses.mit;
-    mainProgram = "sith-language-server";
+    mainProgram = "sith-lsp";
   };
 }

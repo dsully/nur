@@ -11,7 +11,7 @@
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
 
-  apple-photos-export = pkgs.callPackage ./pkgs/apple-photos-export.nix {};
+  apple-photos-export = pkgs.lib.optional pkgs.stdenv.isDarwin (pkgs.callPackage ./pkgs/apple-photos-export.nix {});
   autorebase = pkgs.callPackage ./pkgs/autorebase.nix {};
   codesort = pkgs.callPackage ./pkgs/codesort.nix {};
   # curlconverter = pkgs.callPackage ./pkgs/curlconverter.nix {};
@@ -30,10 +30,10 @@
   pyproject-fmt = pkgs.callPackage ./pkgs/pyproject-fmt.nix {inherit toml-fmt-common;};
   # qlty = pkgs.callPackage ./pkgs/qlty.nix {};
   reading-list-to-pinboard = pkgs.callPackage ./pkgs/reading-list-to-pinboard-rs {};
-  safari-rs = pkgs.callPackage ./pkgs/safari-rs.nix {};
+  safari-rs = pkgs.lib.optional pkgs.stdenv.isDarwin (pkgs.callPackage ./pkgs/safari-rs.nix {});
   sith-language-server = pkgs.callPackage ./pkgs/sith-language-server.nix {};
   sphinx-lint = pkgs.callPackage ./pkgs/sphinx-lint.nix {};
-  sps = pkgs.callPackage ./pkgs/sps {};
+  sps = pkgs.lib.optional pkgs.stdenv.isDarwin (pkgs.callPackage ./pkgs/sps {});
   toml-fmt-common = pkgs.callPackage ./pkgs/toml-fmt-common.nix {};
   turbo-commit = pkgs.callPackage ./pkgs/turbo-commit.nix {};
   werk = pkgs.callPackage ./pkgs/werk.nix {};

@@ -1,12 +1,13 @@
 {
-  lib,
   rustPlatform,
+  lib,
   fetchFromGitHub,
   pkgs,
   stdenv,
 }:
-lib.optionalAttrs stdenv.isDarwin (
-  rustPlatform.buildRustPackage rec {
+if stdenv.isDarwin
+then
+  rustPlatform.buildRustPackage {
     pname = "sps";
     version = "2025-05-01-255e633";
 
@@ -39,10 +40,9 @@ lib.optionalAttrs stdenv.isDarwin (
     meta = {
       description = "Rust based package manager for macOS";
       homepage = "https://github.com/alexykn/sps";
-      maintainers = with lib.maintainers; [];
       license = lib.licenses.bsd3;
       mainProgram = "sps";
       platforms = lib.platforms.darwin;
     };
   }
-)
+else {}
