@@ -26,6 +26,7 @@ prev: {lib, ...}: let
   # Handle special cases: directories
   specialCases = {
     reading-list-to-pinboard-rs = prev.callPackage ../pkgs/reading-list-to-pinboard-rs {};
+    sps = prev.callPackage ../pkgs/sps {};
   };
 in
   specialCases // packageAttrs
