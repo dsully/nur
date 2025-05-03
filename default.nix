@@ -33,6 +33,7 @@
   safari-rs = pkgs.callPackage ./pkgs/safari-rs.nix {};
   sith-language-server = pkgs.callPackage ./pkgs/sith-language-server.nix {};
   sphinx-lint = pkgs.callPackage ./pkgs/sphinx-lint.nix {};
+  sps = pkgs.callPackage ./pkgs/sps {};
   toml-fmt-common = pkgs.callPackage ./pkgs/toml-fmt-common.nix {};
   turbo-commit = pkgs.callPackage ./pkgs/turbo-commit.nix {};
   werk = pkgs.callPackage ./pkgs/werk.nix {};
