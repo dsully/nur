@@ -33,7 +33,7 @@
   safari-rs = pkgs.lib.optional pkgs.stdenv.isDarwin (pkgs.callPackage ./pkgs/safari-rs.nix {});
   sith-language-server = pkgs.callPackage ./pkgs/sith-language-server.nix {};
   sphinx-lint = pkgs.callPackage ./pkgs/sphinx-lint.nix {};
-  sps = pkgs.lib.optional pkgs.stdenv.isDarwin (pkgs.callPackage ./pkgs/sps {});
+  sps = pkgs.lib.optional pkgs.stdenv.isDarwin (pkgs.callPackage ./pkgs/sps.nix {});
   toml-fmt-common = pkgs.callPackage ./pkgs/toml-fmt-common.nix {};
   turbo-commit = pkgs.callPackage ./pkgs/turbo-commit.nix {};
   werk = pkgs.callPackage ./pkgs/werk.nix {};

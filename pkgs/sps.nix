@@ -14,19 +14,12 @@ then
     src = fetchFromGitHub {
       owner = "alexykn";
       repo = "sps";
-      rev = "255e633f1506689d1b176ab4a8d60b928096dc03";
-      hash = "sha256-vd0KCGM7tOpYe0L4DukIIx6/RKzM3JsJzIj2FIizSeg=";
+      rev = "2c5d5152471d61b08012c8dcdea3e93725032f3c";
+      hash = "sha256-X5LzIHlLGKwQwMxiCIWHqU8JLEwnkCqDANhZclBqxPE=";
     };
 
-    cargoLock = {
-      lockFile = ./Cargo.lock;
-      allowBuiltinFetchGit = true;
-    };
-
-    postPatch = ''
-      ln -s ${./Cargo.lock} Cargo.lock
-    '';
-
+    cargoHash = "sha256-eOlA3Mdh/FNLPF3AjlKmOrIxZJGQFFWaH/6MBZ6k3Zs=";
+    useFetchCargoVendor = true;
     doCheck = false;
 
     nativeBuildInputs = [
