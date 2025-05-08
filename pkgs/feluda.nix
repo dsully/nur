@@ -2,26 +2,29 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
-  stdenv,
-  darwin,
+  pkgs,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "feluda";
-  version = "1.5.1";
+  version = "1.6.2";
 
   src = fetchFromGitHub {
     owner = "anistark";
     repo = "feluda";
     rev = version;
-    hash = "sha256-UajBNdyqLi5XALS4JdQa5B+Trwx5298rSzIvD3mZ5xQ=";
+    hash = "sha256-R8x4lN4BtVbpSHll0KVdzX7IDhArsZiJFo6qNsFrgnA=";
   };
 
   useFetchCargoVendor = true;
-  cargoHash = "sha256-NJJblqpxOxVsE0Qbg258eLhNATDn8r6jjqtg7Q3Gb/8=";
+  cargoHash = "sha256-F5flqmoH9QykmCvuqxLhsdpm3AYhwhCG4O1oRkEOY8U=";
   doCheck = false;
 
-  buildInputs = lib.optionals stdenv.isDarwin [
-    darwin.apple_sdk.frameworks.Security
+  nativeBuildInputs = [
+    pkgs.pkg-config
+  ];
+
+  buildInputs = [
+    pkgs.openssl
   ];
 
   meta = {
