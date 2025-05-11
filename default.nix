@@ -25,6 +25,7 @@
   github-actions-languageserver = pkgs.callPackage ./pkgs/github-actions-languageserver.nix {};
   lolcate-rs = pkgs.callPackage ./pkgs/lolcate-rs.nix {};
   magic-opener = pkgs.callPackage ./pkgs/magic-opener.nix {};
+  oli = pkgs.callPackage ./pkgs/oli.nix {};
   # mc = pkgs.callPackage ./pkgs/mc.nix {};
   pkl-lsp = pkgs.callPackage ./pkgs/pkl-lsp.nix {};
   pyproject-fmt = pkgs.callPackage ./pkgs/pyproject-fmt.nix {inherit toml-fmt-common;};

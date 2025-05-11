@@ -75,7 +75,7 @@ fetch-to url rev output_name:
 # Usage: just build <package>
 build package:
     @echo "Building package {{ package }}..."
-    nix-build -A {{ package }}
+    NIXPKGS_ALLOW_UNFREE=1 nix-build -A {{ package }}
 
 # Build all packages in the repository
 build-all:
@@ -91,7 +91,7 @@ build-all:
     @# Build each package and log results
     @for pkg in $packages; do \
         echo "Building $$pkg..."; \
-        if nix-build -A $$pkg --no-out-link > build-results/$$pkg.log 2>&1; then \
+        if NIXPKGS_ALLOW_UNFREE=1 nix-build -A $$pkg --no-out-link > build-results/$$pkg.log 2>&1; then \
             echo "✅ $$pkg built successfully"; \
         else \
             echo "❌ $$pkg failed to build (see build-results/$$pkg.log for details)"; \
