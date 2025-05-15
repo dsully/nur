@@ -10,6 +10,9 @@ nixpkgs_file := "default.nix"
 help:
     @just --list
 
+up:
+    nix flake update
+
 # Fetch a source using nurl
 
 # Usage: just fetch <url> <revision>
