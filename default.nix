@@ -19,7 +19,7 @@
   dirstat-rs = pkgs.callPackage ./pkgs/dirstat-rs.nix {};
   feluda = pkgs.callPackage ./pkgs/feluda.nix {};
   geil = pkgs.callPackage ./pkgs/geil.nix {};
-  ghostty-ls = pkgs.callPackage ./pkgs/ghostty-ls.nix {};
+  # ghostty-ls = pkgs.callPackage ./pkgs/ghostty-ls.nix {};
   git-ai-commit = pkgs.callPackage ./pkgs/git-ai-commit.nix {};
   git-trim = pkgs.callPackage ./pkgs/git-trim.nix {};
   github-actions-languageserver = pkgs.callPackage ./pkgs/github-actions-languageserver.nix {};
