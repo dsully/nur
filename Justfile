@@ -1,10 +1,6 @@
 # Justfile for fetching sources using nurl and building Nix packages
 # Default values
-
-default_url := "https://github.com/NixOS/nixpkgs"
-default_rev := "master"
 output_dir := "nix/sources"
-nixpkgs_file := "default.nix"
 
 # Help command
 help:
@@ -16,7 +12,7 @@ up:
 # Fetch a source using nurl
 
 # Usage: just fetch <url> <revision>
-fetch url=default_url rev=default_rev:
+fetch url rev:
     @echo "Fetching from {{ url }} at revision {{ rev }}..."
     @mkdir -p {{ output_dir }}
     @nix run nixpkgs#nurl -- \
@@ -78,7 +74,7 @@ fetch-to url rev output_name:
 # Usage: just build <package>
 build package:
     @echo "Building package {{ package }}..."
-    NIXPKGS_ALLOW_UNFREE=1 nix-build -A {{ package }}
+    NIXPKGS_ALLOW_UNFREE=1 nix build .#{{ package }}
 
 # Build all packages in the repository
 build-all:
@@ -94,7 +90,7 @@ build-all:
     @# Build each package and log results
     @for pkg in $packages; do \
         echo "Building $$pkg..."; \
-        if NIXPKGS_ALLOW_UNFREE=1 nix-build -A $$pkg --no-out-link > build-results/$$pkg.log 2>&1; then \
+        if NIXPKGS_ALLOW_UNFREE=1 nix build .#$$pkg --no-out-link > build-results/$$pkg.log 2>&1; then \
             echo "✅ $$pkg built successfully"; \
         else \
             echo "❌ $$pkg failed to build (see build-results/$$pkg.log for details)"; \
@@ -119,7 +115,7 @@ build-all-parallel:
     @mkdir -p build-results
 
     @# Build all packages in parallel
-    @echo $packages | tr ' ' '\n' | xargs -P $(nproc) -I{} bash -c 'echo "Building {}..." && if nix-build -A {} --no-out-link > build-results/{}.log 2>&1; then echo "✅ {} built successfully"; else echo "❌ {} failed to build"; fi'
+    @echo $packages | tr ' ' '\n' | xargs -P $(nproc) -I{} bash -c 'echo "Building {}..." && if nix build .#{} --no-out-link > build-results/{}.log 2>&1; then echo "✅ {} built successfully"; else echo "❌ {} failed to build"; fi'
 
     @# Print summary
     @echo ""
@@ -144,4 +140,4 @@ clean:
 # Usage: just show-path <package>
 show-path package:
     @echo "Store path for {{ package }}:"
-    nix-build -A {{ package }} --no-out-link
+    nix build .#{{ package }} --no-out-link

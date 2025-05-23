@@ -25,6 +25,7 @@ prev: {lib, ...}: let
 
   # Handle special cases: directories
   specialCases = {
+    gh-actions-language-server = prev.callPackage ../pkgs/gh-actions-language-server {};
     reading-list-to-pinboard-rs = prev.callPackage ../pkgs/reading-list-to-pinboard-rs {};
   };
 in

@@ -5,7 +5,12 @@
 # Having pkgs default to <nixpkgs> is fine though, and it lets you use short
 # commands such as:
 #     nix-build -A mypackage
-{pkgs ? import <nixpkgs> {}, ...}: rec {
+{
+  bun2nix,
+  pkgs ? import <nixpkgs> {},
+  system,
+  ...
+}: rec {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib {inherit pkgs;}; # functions
   modules = import ./modules; # NixOS modules
@@ -22,7 +27,9 @@
   # ghostty-ls = pkgs.callPackage ./pkgs/ghostty-ls.nix {};
   git-ai-commit = pkgs.callPackage ./pkgs/git-ai-commit.nix {};
   git-trim = pkgs.callPackage ./pkgs/git-trim.nix {};
-  github-actions-languageserver = pkgs.callPackage ./pkgs/github-actions-languageserver.nix {};
+  gh-actions-language-server = pkgs.callPackage ./pkgs/gh-actions-language-server {
+    inherit (bun2nix.lib.${system}) mkBunDerivation;
+  };
   lolcate-rs = pkgs.callPackage ./pkgs/lolcate-rs.nix {};
   magic-opener = pkgs.callPackage ./pkgs/magic-opener.nix {};
   oli = pkgs.callPackage ./pkgs/oli.nix {};
