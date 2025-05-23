@@ -8,8 +8,13 @@
 #
 # then your CI will be able to build and cache only those packages for
 # which this is possible.
-{pkgs ? import <nixpkgs> {}}:
+{system ? builtins.currentSystem}:
 with builtins; let
+  flake = builtins.getFlake (toString ./.);
+  inherit (flake) inputs;
+  pkgs = import inputs.nixpkgs {inherit system;};
+  nurAttrs = import ./default.nix {inherit system pkgs inputs;};
+
   isReserved = n: n == "lib" || n == "overlays" || n == "modules";
   isDerivation = p: isAttrs p && p ? type && p.type == "derivation";
   isBuildable = p: let
@@ -41,8 +46,6 @@ with builtins; let
     concatMap f (attrValues s);
 
   outputsOf = p: map (o: p.${o}) p.outputs;
-
-  nurAttrs = import ./default.nix {inherit pkgs;};
 
   nurPkgs =
     flattenPkgs

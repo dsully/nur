@@ -6,7 +6,7 @@
 # commands such as:
 #     nix-build -A mypackage
 {
-  bun2nix,
+  inputs,
   pkgs ? import <nixpkgs> {},
   system,
   ...
@@ -28,7 +28,7 @@
   git-ai-commit = pkgs.callPackage ./pkgs/git-ai-commit.nix {};
   git-trim = pkgs.callPackage ./pkgs/git-trim.nix {};
   gh-actions-language-server = pkgs.callPackage ./pkgs/gh-actions-language-server {
-    inherit (bun2nix.lib.${system}) mkBunDerivation;
+    inherit (inputs.bun2nix.lib.${system}) mkBunDerivation;
   };
   lolcate-rs = pkgs.callPackage ./pkgs/lolcate-rs.nix {};
   magic-opener = pkgs.callPackage ./pkgs/magic-opener.nix {};

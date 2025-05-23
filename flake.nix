@@ -11,10 +11,9 @@
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
-    bun2nix,
     ...
   }: let
     forAllSystems = nixpkgs.lib.genAttrs nixpkgs.lib.systems.flakeExposed;
@@ -38,7 +37,7 @@
           config.allowUnfree = true;
         };
 
-        inherit bun2nix system;
+        inherit inputs system;
       });
 
     overlays.default = import ./overlays;
