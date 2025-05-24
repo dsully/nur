@@ -6,8 +6,7 @@
   libgit2,
   openssl,
   zlib,
-  stdenv,
-  darwin,
+  ...
 }:
 rustPlatform.buildRustPackage {
   pname = "git-trim";
@@ -28,16 +27,11 @@ rustPlatform.buildRustPackage {
     pkg-config
   ];
 
-  buildInputs =
-    [
-      libgit2
-      openssl
-      zlib
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      darwin.apple_sdk.frameworks.IOKit
-      darwin.apple_sdk.frameworks.Security
-    ];
+  buildInputs = [
+    libgit2
+    openssl
+    zlib
+  ];
 
   meta = {
     description = "Automatically trims your branches whose tracking remote refs are merged or stray";

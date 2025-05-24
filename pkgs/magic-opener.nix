@@ -2,6 +2,7 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
+  ...
 }: let
   pname = "magic-opener";
   version = "0.0.5";

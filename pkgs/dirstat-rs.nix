@@ -2,6 +2,7 @@
   lib,
   pkgs,
   rustPlatform,
+  ...
 }: let
   pname = "dirstat-rs";
   version = "v0.3.7";

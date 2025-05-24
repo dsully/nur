@@ -1,13 +1,11 @@
 {
-  lib,
   rustPlatform,
   fetchFromGitHub,
   pkg-config,
   libgit2,
   openssl,
   zlib,
-  stdenv,
-  darwin,
+  ...
 }:
 rustPlatform.buildRustPackage rec {
   pname = "git-ai-commit";
@@ -28,15 +26,11 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  buildInputs =
-    [
-      libgit2
-      openssl
-      zlib
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      darwin.apple_sdk.frameworks.Security
-    ];
+  buildInputs = [
+    libgit2
+    openssl
+    zlib
+  ];
 
   meta = {
     description = "Smarter commits, crafted by AI & powered by Rust’s speed";

@@ -4,6 +4,7 @@
   pkgs,
   rustPlatform,
   stdenv,
+  ...
 }:
 if stdenv.isDarwin
 then

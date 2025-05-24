@@ -5,6 +5,7 @@
   pkg-config,
   libgit2,
   zlib,
+  ...
 }:
 rustPlatform.buildRustPackage rec {
   pname = "devmoji-log";

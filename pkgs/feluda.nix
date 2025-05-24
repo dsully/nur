@@ -3,6 +3,7 @@
   rustPlatform,
   fetchFromGitHub,
   pkgs,
+  ...
 }:
 rustPlatform.buildRustPackage rec {
   pname = "feluda";

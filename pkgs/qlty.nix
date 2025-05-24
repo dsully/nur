@@ -10,8 +10,7 @@
   openssl,
   zlib,
   zstd,
-  stdenv,
-  darwin,
+  ...
 }:
 rustPlatform.buildRustPackage rec {
   pname = "qlty";
@@ -33,22 +32,14 @@ rustPlatform.buildRustPackage rec {
     protobuf
   ];
 
-  buildInputs =
-    [
-      bzip2
-      libgit2
-      oniguruma
-      openssl
-      zlib
-      zstd
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      darwin.apple_sdk.frameworks.CoreFoundation
-      darwin.apple_sdk.frameworks.CoreServices
-      darwin.apple_sdk.frameworks.IOKit
-      darwin.apple_sdk.frameworks.Security
-      darwin.apple_sdk.frameworks.SystemConfiguration
-    ];
+  buildInputs = [
+    bzip2
+    libgit2
+    oniguruma
+    openssl
+    zlib
+    zstd
+  ];
 
   env = {
     OPENSSL_NO_VENDOR = true;

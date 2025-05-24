@@ -1,6 +1,7 @@
 {
   python3,
   fetchPypi,
+  ...
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "sphinx-lint";

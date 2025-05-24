@@ -3,6 +3,7 @@
   stdenv,
   fetchFromGitHub,
   zig,
+  ...
 }:
 stdenv.mkDerivation {
   pname = "ghostty-ls";

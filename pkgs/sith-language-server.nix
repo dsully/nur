@@ -4,6 +4,7 @@
   fetchFromGitHub,
   pkg-config,
   zstd,
+  ...
 }:
 rustPlatform.buildRustPackage rec {
   pname = "sith-language-server";

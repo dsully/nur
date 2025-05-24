@@ -4,6 +4,7 @@
   fetchFromGitHub,
   pkgs,
   stdenv,
+  ...
 }:
 if stdenv.isDarwin
 then

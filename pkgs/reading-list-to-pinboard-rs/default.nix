@@ -4,8 +4,7 @@
   fetchFromGitHub,
   pkg-config,
   openssl,
-  stdenv,
-  darwin,
+  ...
 }:
 rustPlatform.buildRustPackage {
   pname = "reading-list-to-pinboard-rs";
@@ -30,14 +29,9 @@ rustPlatform.buildRustPackage {
     pkg-config
   ];
 
-  buildInputs =
-    [
-      openssl
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      darwin.apple_sdk.frameworks.Security
-      darwin.apple_sdk.frameworks.SystemConfiguration
-    ];
+  buildInputs = [
+    openssl
+  ];
 
   meta = {
     description = "A simple rust project to upload Safari Reading List links to pinboard or raindrop";

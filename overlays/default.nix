@@ -2,31 +2,24 @@
   This contains various packages we want to overlay. Note that the
 * other ".nix" files in this directory are automatically loaded.
 */
-prev: {lib, ...}: let
-  # Function to import a single file
-  importPackage = file: prev.callPackage file {};
+inputs: final: prev: let
+  inherit (prev) lib;
 
-  # Get all .nix files from the packages directory
-  packageFiles =
-    lib.filterAttrs
-    (name: type: type == "regular" && lib.hasSuffix ".nix" name)
-    (builtins.readDir ../pkgs);
+  dirContents = builtins.readDir ../pkgs;
 
-  # Convert filenames to attribute names (remove .nix extension)
-  packageAttrs =
-    lib.mapAttrs'
-    (
-      name: _:
-        lib.nameValuePair
-        (lib.removeSuffix ".nix" name)
-        (importPackage ../pkgs/${name})
-    )
-    packageFiles;
-
-  # Handle special cases: directories
-  specialCases = {
-    gh-actions-language-server = prev.callPackage ../pkgs/gh-actions-language-server {};
-    reading-list-to-pinboard-rs = prev.callPackage ../pkgs/reading-list-to-pinboard-rs {};
-  };
+  packages = lib.pipe dirContents [
+    (lib.filterAttrs (n: t: t == "regular" && lib.hasSuffix ".nix" n || t == "directory"))
+    (lib.mapAttrs (
+      name: _type:
+      # callPackageWithBun2nix ../pkgs/${name} {}
+        prev.callPackage ../pkgs/${name} {
+          inherit inputs;
+        }
+    ))
+    (lib.mapAttrs' (
+      name: value:
+        lib.nameValuePair (lib.removeSuffix ".nix" name) value
+    ))
+  ];
 in
-  specialCases // packageAttrs
+  packages

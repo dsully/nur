@@ -3,6 +3,7 @@
   lib,
   pkgs,
   rustPlatform,
+  ...
 }:
 rustPlatform.buildRustPackage {
   pname = "oli";

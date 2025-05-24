@@ -6,8 +6,7 @@
   libgit2,
   openssl,
   zlib,
-  stdenv,
-  darwin,
+  ...
 }:
 rustPlatform.buildRustPackage rec {
   pname = "turbo-commit";
@@ -28,15 +27,11 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  buildInputs =
-    [
-      libgit2
-      openssl
-      zlib
-    ]
-    ++ lib.optionals stdenv.isDarwin [
-      darwin.apple_sdk.frameworks.Security
-    ];
+  buildInputs = [
+    libgit2
+    openssl
+    zlib
+  ];
 
   meta = {
     description = "Turbocommit is a Rust-based CLI tool that generates high-quality git commit messages in accordance with the Conventional Commits specification, using OpenAI API compatible service. It is easy to use and a cost-effective way to keep git commit history at a higher quality, helping developers stay on track with their work";

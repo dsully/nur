@@ -2,6 +2,7 @@
   lib,
   rustPlatform,
   fetchFromGitHub,
+  ...
 }: let
   pname = "lolcate-rs";
   version = "HEAD";

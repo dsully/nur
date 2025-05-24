@@ -40,6 +40,6 @@
         inherit inputs system;
       });
 
-    overlays.default = import ./overlays;
+    overlays.default = import ./overlays inputs;
   };
 }

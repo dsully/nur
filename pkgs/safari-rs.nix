@@ -1,10 +1,10 @@
 {
-  darwin,
   fetchFromGitHub,
   lib,
   pkgs,
   rustPlatform,
   stdenv,
+  ...
 }:
 if stdenv.isDarwin
 then
@@ -30,7 +30,6 @@ then
     buildInputs = [
       pkgs.openssl
       pkgs.zlib
-      darwin.apple_sdk.frameworks.Security
     ];
 
     meta = {

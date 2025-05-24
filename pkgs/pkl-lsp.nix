@@ -4,6 +4,7 @@
   fetchurl,
   jdk23_headless,
   makeWrapper,
+  ...
 }:
 stdenv.mkDerivation rec {
   pname = "pkl-lsp";
@@ -30,7 +31,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out/share/java $out/bin
     cp $src $out/share/java/${pname}-${version}.jar
 
-    makeWrapper ${jdk23_headless}/bin/java $out/bin/${pname} \
-      --add-flags "-jar $out/share/java/${pname}-${version}.jar"
-  '';
+    # shellcheck disable=SC1072,SC1073,SC1009
+    makeWrapper ${jdk23_headless}/bin/java $out/bin/${pname} --add-flags "-jar $out/share/java/${pname}-${version}.jar"'';
 }

@@ -6,6 +6,7 @@
   rustPlatform,
   rustc,
   toml-fmt-common,
+  ...
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "pyproject-fmt";
