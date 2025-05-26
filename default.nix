@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs ? import <nixpkgs> {},
+  system,
   ...
 }: let
   # Apply the overlay to get all packages
@@ -11,6 +12,8 @@ in {
   lib = import ./lib {inherit pkgs;}; # functions
   modules = import ./modules; # NixOS modules
   overlays = overlay inputs;
+
+  inherit (inputs.emmylua-analyzer-rust.packages.${system}) emmylua_ls emmylua_check;
 
   # Re-export all packages from the overlay
   inherit

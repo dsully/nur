@@ -7,7 +7,7 @@ inputs: _: prev: let
 
   dirContents = builtins.readDir ../pkgs;
 
-  packages = lib.pipe dirContents [
+  packagesFromDir = lib.pipe dirContents [
     (lib.filterAttrs (n: t: t == "regular" && lib.hasSuffix ".nix" n || t == "directory"))
     (lib.mapAttrs (
       name: _type:
@@ -20,5 +20,12 @@ inputs: _: prev: let
         lib.nameValuePair (lib.removeSuffix ".nix" name) value
     ))
   ];
+
+  emmyluaPackages = {
+    emmylua_ls = inputs.emmylua-analyzer-rust.packages.${prev.system}.default;
+    emmylua_check = inputs.emmylua-analyzer-rust.packages.${prev.system}.default;
+  };
+
+  packages = packagesFromDir // emmyluaPackages;
 in
   packages
