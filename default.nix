@@ -41,6 +41,7 @@ in {
     sps
     toml-fmt-common
     turbo-commit
+    ty
     werk
     xdg-open-svc
     xmlformatter

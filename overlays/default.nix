@@ -2,7 +2,7 @@
   This contains various packages we want to overlay. Note that the
 * other ".nix" files in this directory are automatically loaded.
 */
-inputs: final: prev: let
+inputs: _: prev: let
   inherit (prev) lib;
 
   dirContents = builtins.readDir ../pkgs;
@@ -11,7 +11,6 @@ inputs: final: prev: let
     (lib.filterAttrs (n: t: t == "regular" && lib.hasSuffix ".nix" n || t == "directory"))
     (lib.mapAttrs (
       name: _type:
-      # callPackageWithBun2nix ../pkgs/${name} {}
         prev.callPackage ../pkgs/${name} {
           inherit inputs;
         }
