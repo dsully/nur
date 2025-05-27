@@ -10,7 +10,7 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
-    emmylua-analyzer-rust.url = "github:dsully/emmylua-analyzer-rust?ref=fix-flake";
+    emmylua-analyzer-rust.url = "github:EmmyLuaLs/emmylua-analyzer-rust";
     emmylua-analyzer-rust.inputs.nixpkgs.follows = "nixpkgs";
   };
 
