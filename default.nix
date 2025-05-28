@@ -27,7 +27,7 @@ in {
     feluda
     geil
     gh-actions-language-server
-    # ghostty-ls
+    ghostty-ls
     git-ai-commit
     git-trim
     lolcate-rs
