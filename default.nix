@@ -21,7 +21,7 @@ in {
     apple-photos-export
     autorebase
     codesort
-    # curlconverter
+    curlconverter
     devmoji-log
     dirstat-rs
     feluda
