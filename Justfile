@@ -1,5 +1,3 @@
-# Justfile for fetching sources using nurl and building Nix packages
-# Default values
 output_dir := "nix/sources"
 
 # Help command
@@ -9,65 +7,28 @@ help:
 up:
     nix flake update
 
-# Fetch a source using nurl
+# Fetch a source using nix-init (via nurl)
 
-# Usage: just fetch <url> <revision>
-fetch url rev:
-    @echo "Fetching from {{ url }} at revision {{ rev }}..."
-    @mkdir -p {{ output_dir }}
-    @nix run nixpkgs#nurl -- \
-        --url {{ url }} \
-        --rev {{ rev }} \
-        --output {{ output_dir }}/source.nix
+# Usage: just init-from-url https://github.com/anistark/feluda
+[group('nix')]
+init-from-url URL:
+    #!/usr/bin/env bash
+    set -euo pipefail
 
-# Fetch a GitHub repository
+    # Extract the last path component from the URL
+    LAST_COMPONENT=$(echo "{{ URL }}" | sed -E 's|.*/([^/]+)/?$|\1|')
 
-# Usage: just fetch-github <owner> <repo> <revision>
-fetch-github owner repo rev:
-    @echo "Fetching GitHub repo {{ owner }}/{{ repo }} at revision {{ rev }}..."
-    @mkdir -p {{ output_dir }}
-    @nix run nixpkgs#nurl -- \
-        --url https://github.com/{{ owner }}/{{ repo }} \
-        --rev {{ rev }} \
-        --output {{ output_dir }}/{{ repo }}.nix
+    # Remove any trailing .git if present
+    LAST_COMPONENT=${LAST_COMPONENT%.git}
 
-# Fetch and generate cargoHash for a Rust package
+    # Create the output filename
+    OUTPUT_FILE=pkgs/"${LAST_COMPONENT}.nix"
 
-# Usage: just fetch-rust <owner> <repo> <revision>
-fetch-rust owner repo rev:
-    @echo "Fetching Rust package {{ owner }}/{{ repo }} at revision {{ rev }}..."
-    @mkdir -p {{ output_dir }}
+    # Run nix-init with the specified parameters
+    nix-init -n 'builtins.getFlake "nixpkgs"' -u "{{ URL }}" "${OUTPUT_FILE}"
 
-    # First fetch the source
-    @nix run nixpkgs#nurl -- \
-        --url https://github.com/{{ owner }}/{{ repo }} \
-        --rev {{ rev }} \
-        --output {{ output_dir }}/{{ repo }}-src.nix
-
-    # Create a temporary Nix file to get cargoHash
-    @echo "{ pkgs ? import <nixpkgs> {} }:" > {{ output_dir }}/temp-{{ repo }}.nix
-    @echo "let src = import ./{{ repo }}-src.nix { inherit (pkgs) fetchFromGitHub lib; };" >> {{ output_dir }}/temp-{{ repo }}.nix
-    @echo "in pkgs.rustPlatform.buildRustPackage {" >> {{ output_dir }}/temp-{{ repo }}.nix
-    @echo "  pname = \"{{ repo }}\";" >> {{ output_dir }}/temp-{{ repo }}.nix
-    @echo "  version = \"{{ rev }}\";" >> {{ output_dir }}/temp-{{ repo }}.nix
-    @echo "  inherit src;" >> {{ output_dir }}/temp-{{ repo }}.nix
-    @echo "  cargoSha256 = pkgs.lib.fakeSha256;" >> {{ output_dir }}/temp-{{ repo }}.nix
-    @echo "}" >> {{ output_dir }}/temp-{{ repo }}.nix
-
-    @echo "Attempting to build to get cargoHash (this will fail with the correct hash)..."
-    @nix-build {{ output_dir }}/temp-{{ repo }}.nix || true
-    @echo "Copy the hash from the error message above and update your Nix expression"
-
-# Fetch with custom output filename
-
-# Usage: just fetch-to <url> <revision> <output-name>
-fetch-to url rev output_name:
-    @echo "Fetching from {{ url }} at revision {{ rev }}..."
-    @mkdir -p {{ output_dir }}
-    @nix run nixpkgs#nurl -- \
-        --url {{ url }} \
-        --rev {{ rev }} \
-        --output {{ output_dir }}/{{ output_name }}.nix
+    # Add useFetchCargoVendor = true; to the file
+    sed -i '/cargoHash = ".*";/a \    useFetchCargoVendor = true;' "${OUTPUT_FILE}"
 
 # Build a specific package from Nixpkgs
 
