@@ -57,11 +57,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1748651396,
-        "narHash": "sha256-xUMUfxssnXCu49cEkUreIhnjklAwB4QBKrLSYAvJHv8=",
+        "lastModified": 1748695153,
+        "narHash": "sha256-80KaZ2qHdDwC+ppvgWnHlgDoNTK3M7n7MXJecQB2MCw=",
         "owner": "EmmyLuaLs",
         "repo": "emmylua-analyzer-rust",
-        "rev": "c3257c308df6d4df2de0c845d867dbef9947eae6",
+        "rev": "4570dea3eb58e7eabfd7da28e5c554fce77f7447",
         "type": "github"
       },
       "original": {
@@ -140,11 +140,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748572605,
-        "narHash": "sha256-k0nhPtkVDQkVJckRw6fGIeeDBktJf1BH0i8T48o7zkk=",
+        "lastModified": 1748658947,
+        "narHash": "sha256-F+nGITu6D7RswJlm8qCuU1PCuOSgDeAqaDKWW1n1jmQ=",
         "owner": "oxalica",
         "repo": "rust-overlay",
-        "rev": "405ef13a5b80a0a4d4fc87c83554423d80e5f929",
+        "rev": "fc82ce758cc5df6a6d5d24e75710321cdbdc787a",
         "type": "github"
       },
       "original": {
