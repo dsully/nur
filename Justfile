@@ -30,65 +30,61 @@ init-from-url URL:
     # Add useFetchCargoVendor = true; to the file
     sed -i '/cargoHash = ".*";/a \    useFetchCargoVendor = true;' "${OUTPUT_FILE}"
 
-# Build a specific package from Nixpkgs
+# Build a package or all packages
+#
+# Usage: just build [package]
+build +packages='all':
+    #!/usr/bin/env fish
 
-# Usage: just build <package>
-build package:
-    @echo "Building package {{ package }}..."
-    NIXPKGS_ALLOW_UNFREE=1 nix build .#{{ package }}
+    echo "Building {{ packages }} ..."
 
-# Build all packages in the repository
-build-all:
-    @echo "Building all packages in the repository..."
-    @echo "This may take a while..."
+    if test "{{ packages }}" = "all"
+        set pattern pkgs
+    else
+        set pattern (string join '|' {{ packages }})
+    end
 
-    @# Extract all package names from default.nix
-    @packages=$(grep -E "^\s+[a-zA-Z0-9_-]+ =" default.nix | grep -v "^#" | sed 's/ =.*$//' | tr -d ' ' | sort)
+    set files (fd --type f --extension nix --exclude bun.nix --exclude build.zig.zon.nix $pattern pkgs/)
 
-    @# Create a temporary directory for build results
-    @mkdir -p build-results
+    mkdir -p build-results
 
-    @# Build each package and log results
-    @for pkg in $packages; do \
-        echo "Building $$pkg..."; \
-        if NIXPKGS_ALLOW_UNFREE=1 nix build .#$$pkg --no-out-link > build-results/$$pkg.log 2>&1; then \
-            echo "✅ $$pkg built successfully"; \
-        else \
-            echo "❌ $$pkg failed to build (see build-results/$$pkg.log for details)"; \
-        fi; \
-    done
+    set NIXPKGS_ALLOW_UNFREE 1 
 
-    @# Print summary
-    @echo ""
-    @echo "Build Summary:"
-    @echo "Successful: $(grep -c "✅" build-results/*.log)"
-    @echo "Failed: $(grep -c "❌" build-results/*.log)"
-    @echo "See build-results directory for detailed logs"
+    # Build each package and log results
+    for file in $files
 
-# Build all packages in parallel (faster but harder to debug)
-build-all-parallel:
-    @echo "Building all packages in parallel..."
+        set pkg (echo $file | sed 's/pkgs\///' | sed 's/\.nix//' | sed 's/\/.*//')
 
-    @# Extract all package names from default.nix
-    @packages=$(grep -E "^\s+[a-zA-Z0-9_-]+ =" default.nix | grep -v "^#" | sed 's/ =.*$//' | tr -d ' ' | sort)
+        if nix build .#$pkg --no-link > build-results/$pkg.log 2>&1
+            echo "✅ $pkg built successfully"
+        else
+            set new_hash (grep "got:" build-results/$pkg.log | awk '{print $2}')
 
-    @# Create a temporary directory for build results
-    @mkdir -p build-results
+            if string match -qr 'sha256' -- $new_hash
+                echo "Got a new cargoHash: $new_hash - replacing & rebuilding..."
 
-    @# Build all packages in parallel
-    @echo $packages | tr ' ' '\n' | xargs -P $(nproc) -I{} bash -c 'echo "Building {}..." && if nix build .#{} --no-out-link > build-results/{}.log 2>&1; then echo "✅ {} built successfully"; else echo "❌ {} failed to build"; fi'
+                sd "cargoHash = .*" "cargoHash = \"$new_hash\";" "$file"
 
-    @# Print summary
-    @echo ""
-    @echo "Build Summary:"
-    @echo "Successful: $(grep -c "✅" build-results/*.log)"
-    @echo "Failed: $(grep -c "❌" build-results/*.log)"
-    @echo "See build-results directory for detailed logs"
+                if nix build .#$pkg --no-link > build-results/$pkg.log 2>&1
+                    echo "✅ $pkg built successfully"
+
+                    continue
+                end
+            end
+
+            echo "❌ $pkg failed to build (see build-results/$pkg.log for details)"
+        end
+
+        echo
+    end
 
 # List all available packages in the repository
 list-packages:
-    @echo "Available packages in the repository:"
-    @grep -E "^\s+[a-zA-Z0-9_-]+ =" default.nix | grep -v "^#" | sed 's/ =.*$//' | tr -d ' ' | sort
+    #!/usr/bin/env fish
+
+    echo "Available packages in the repository:"
+    echo
+    fd --type f --extension nix --base-directory pkgs pkgs/| sed 's/\.nix//' | sed 's/\/.*//' | sort -u
 
 # Clean generated files
 clean:
