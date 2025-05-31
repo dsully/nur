@@ -6,18 +6,25 @@
   zstd,
   ...
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "sith-language-server";
-  version = "b87963b3ca6da0a1678c5ebf71aac1fd49e964a4";
+  version = "0.2.4-alpha";
+
+  # src = fetchFromGitHub {
+  #   owner = "LaBatata101";
+  #   repo = "sith-language-server";
+  #   rev = "3cc239ed14f578fe887eda41e753412b038264bf";
+  #   hash = "sha256-HypkqlOhS1pZa8NSG4MsEDinhR5oE2rpedGS3V3pvF4=";
+  # };
 
   src = fetchFromGitHub {
-    owner = "LaBatata101";
+    owner = "dsully";
     repo = "sith-language-server";
-    rev = version;
-    hash = "sha256-Bm5LL/CnA9KDzN+MQxFggenLEy1yDc/WxUveYesT2Qk=";
+    rev = "31e32b33f963c82619a60dfa8c98c97f9eeed0e8";
+    hash = "sha256-eQjbKm+4GlPW3sumi1qHypgsOVTcU8Z8Afm4S8MjDUI=";
   };
 
-  cargoHash = "sha256-RQ5xsWR58yUxjAZx2qnuw7MfpvHrifC9tEHhia5Sdps=";
+  cargoHash = "sha256-mtJVR4EKw+e0osmNKlis++6xL7Bo2Xel9wDEmrUn6x4=";
   useFetchCargoVendor = true;
   doCheck = false;
 
