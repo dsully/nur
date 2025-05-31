@@ -6,7 +6,7 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "dirstat-rs";
-  version = "v0.3.8";
+  version = "0.3.8";
 
   src = fetchFromGitHub {
     owner = "scullionw";
