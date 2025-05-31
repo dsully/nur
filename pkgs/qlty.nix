@@ -19,12 +19,12 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "qltysh";
     repo = "qlty";
-    rev = "v${version}";
-    hash = "sha256-o4dw86gAP51hGB6pvy4C9VBqUHm6WG7nXOTMT9zU3LY=";
+    rev = "8c93f9b7691b3128c48bb036d7ddd5124ea901f0";
+    hash = "sha256-VzpeVZ6wpfLSuQC5KVScEZK8C4dOIFeYNQfw/q20bIE=";
   };
 
   doCheck = false;
-  cargoHash = "sha256-Jht6qgwmgZ7h4MtGp72KaZDox0adw9EAttn9bk3jO+Y=";
+  cargoHash = "";
   useFetchCargoVendor = true;
 
   nativeBuildInputs = [

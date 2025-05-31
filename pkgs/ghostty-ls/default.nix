@@ -23,7 +23,7 @@ in
     };
 
     postPatch = ''
-      ln -s ${callPackage ././build.zig.zon.nix {}} $ZIG_GLOBAL_CACHE_DIR/p
+      ln -s ${callPackage ././build.zig.zon.nix {}} "$ZIG_GLOBAL_CACHE_DIR/p"
     '';
 
     nativeBuildInputs = [

@@ -7,14 +7,14 @@
   zlib,
   ...
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "git-ai-commit";
   version = "0.1.1";
 
   src = fetchFromGitHub {
     owner = "ince01";
     repo = "git-ai-commit";
-    rev = "v${version}";
+    rev = "8a46e9065fb4ee0fa131d465c5db8957c9d184e5";
     hash = "sha256-BNNPaDSLRwhz1jJMck08inj0YdwOex7T3ccxGQZMGJg=";
   };
 

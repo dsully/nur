@@ -11,11 +11,11 @@ buildGoModule rec {
   src = fetchFromGitHub {
     owner = "caarlos0";
     repo = "xdg-open-svc";
-    rev = "v${version}";
-    sha256 = "sha256-x6A6Fa2IRJKw9uAF7CmVbj4q8+LScaVnXPJ79fSBjY8=";
+    rev = "65283ef6cd6ac632a749d41b5822e7d832733555";
+    sha256 = "sha256-YCKiM/J76ajMCj15vtTtvCq51Whfv05Fw+4ebJgVMjY=";
   };
 
-  vendorHash = "sha256-qaHsTivC4hgdznEWSKQWKmGEkmeKwIz+0h1PIzYVVm8=";
+  vendorHash = "";
 
   ldflags = ["-s" "-w" "-X=main.version=${version}" "-X=main.builtBy=nixpkgs"];
 

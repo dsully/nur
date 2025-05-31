@@ -33,6 +33,7 @@ in {
     lolcate-rs
     magic-opener
     # mc
+    njq
     oli
     pkl-lsp
     pyproject-fmt

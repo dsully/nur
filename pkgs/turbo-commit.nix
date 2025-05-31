@@ -8,18 +8,18 @@
   zlib,
   ...
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "turbo-commit";
-  version = "5a4075e";
+  version = "1.5.4";
 
   src = fetchFromGitHub {
     owner = "dikkadev";
     repo = "turboCommit";
-    rev = version;
-    hash = "sha256-UAgEoziYzAdF3E+0i6BFEDsg+ZS+h6AGulldI58qcmI=";
+    rev = "b7be8d681e42813ff2082d4ccb79ed5805937dbb";
+    hash = "sha256-0Ftox8jViWCSf/2l8jvc9p4rQab1yDnISCwfM7Hhnb8=";
   };
 
-  cargoHash = "sha256-jScu7Fjz4qfmQ7b7/UGoMkYFNg7Bwc7beC5z/L0b5jU=";
+  cargoHash = "sha256-JhVISTqeNixz2SECcwQ+HW+LGS9Mpc0GUGSEYH9ECnQ=";
   useFetchCargoVendor = true;
   doCheck = false;
 

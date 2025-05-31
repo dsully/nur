@@ -3,21 +3,20 @@
   fetchFromGitHub,
   ...
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "autorebase";
   version = "0.6.0";
 
   src = fetchFromGitHub {
     owner = "Timmmm";
     repo = "autorebase";
-    rev = version;
-    hash = "sha256-KyusrY+LPLstQ65XqXIjBDJiLeuL7cuzN4uwCmtK8Ho=";
+    rev = "ea257cae8d61ffcf2a5bb15c61806f4ac08fb5b3";
+    hash = "sha256-xREhcZBX3jIprfYfErl+UAy8+/EMFFlmCCjLHuNHF+0=";
   };
 
-  doCheck = false;
-
-  cargoHash = "sha256-zeB+4RZRIRI6ZifE/xBoOps27s+1nmmB7gbc6KxfZWI=";
+  cargoHash = "sha256-s08cFckRyFqrIe/oPyJF+SFMkB/thghobU8iGly4zuI=";
   useFetchCargoVendor = true;
+  doCheck = false;
 
   meta = {
     description = "Automatically rebase all your branches onto master";

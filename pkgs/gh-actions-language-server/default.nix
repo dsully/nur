@@ -5,7 +5,7 @@
   system,
   ...
 }: let
-  mkBunDerivation = inputs.bun2nix.lib.${system}.mkBunDerivation;
+  inherit (inputs.bun2nix.lib.${system}) mkBunDerivation;
 in
   mkBunDerivation {
     pname = "gh-actions-language-server";

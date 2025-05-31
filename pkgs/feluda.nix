@@ -5,19 +5,19 @@
   pkgs,
   ...
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "feluda";
-  version = "1.6.2";
+  version = "1.7.0";
 
   src = fetchFromGitHub {
     owner = "anistark";
     repo = "feluda";
-    rev = version;
-    hash = "sha256-R8x4lN4BtVbpSHll0KVdzX7IDhArsZiJFo6qNsFrgnA=";
+    rev = "73953e4babf83ae11b8ba11a32019d89e811d747";
+    hash = "sha256-rx+VZuA896TNlacIhMMMMhjz3L2BZouiY6HNYCm6nK8=";
   };
 
   useFetchCargoVendor = true;
-  cargoHash = "sha256-F5flqmoH9QykmCvuqxLhsdpm3AYhwhCG4O1oRkEOY8U=";
+  cargoHash = "sha256-JXDd2EB2ew9f+EvK76nkV0eBC4gshpo1eXWvRb2PHgs=";
   doCheck = false;
 
   nativeBuildInputs = [
