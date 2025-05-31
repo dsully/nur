@@ -36,15 +36,14 @@ init-from-url URL:
 build +packages='all':
     #!/usr/bin/env fish
 
-    echo "Building {{ packages }} ..."
+    set pattern
 
-    if test "{{ packages }}" = "all"
-        set pattern pkgs
-    else
-        set pattern (string join '|' {{ packages }})
+    if test "{{ packages }}" != "all"
+        set glob (string join "," {{ packages }})
+        set pattern --glob="*{$glob}*"
     end
 
-    set files (fd --type f --extension nix --exclude bun.nix --exclude build.zig.zon.nix $pattern pkgs/)
+    set files (rg -l --color=never --sort path --type nix $pattern "src = " pkgs/)
 
     mkdir -p build-results
 
@@ -53,29 +52,31 @@ build +packages='all':
     # Build each package and log results
     for file in $files
 
-        set pkg (echo $file | sed 's/pkgs\///' | sed 's/\.nix//' | sed 's/\/.*//')
+        set pkg (rg 'pname = "([^"]+)"' $file -o --max-count=1 --replace '$1' --no-line-number --color=never)
+
+        echo -n "Building $pkg ..."
 
         if nix build .#$pkg --no-link > build-results/$pkg.log 2>&1
-            echo "✅ $pkg built successfully"
+            echo (set_color green) "success!" (set_color normal)
         else
             set new_hash (grep "got:" build-results/$pkg.log | awk '{print $2}')
 
             if string match -qr 'sha256' -- $new_hash
-                echo "Got a new cargoHash: $new_hash - replacing & rebuilding..."
+                echo
+                echo "  Got a new cargoHash: $new_hash"
+                echo -n "  Rebuilding ..."
 
                 sd "cargoHash = .*" "cargoHash = \"$new_hash\";" "$file"
+                sd "vendorHash = .*" "vendorHash = \"$new_hash\";" "$file"
 
                 if nix build .#$pkg --no-link > build-results/$pkg.log 2>&1
-                    echo "✅ $pkg built successfully"
-
+                    echo (set_color green) "success!" (set_color normal)
                     continue
                 end
             end
 
-            echo "❌ $pkg failed to build (see build-results/$pkg.log for details)"
+            echo (set_color red) "failed" (set_color normal) "! See build-results/$pkg.log for details."
         end
-
-        echo
     end
 
 # List all available packages in the repository
@@ -92,9 +93,82 @@ clean:
     @rm -rf {{ output_dir }} build-results
     @mkdir -p {{ output_dir }}
 
-# Show the Nix store path for a package without building it
+# Update all package URLs using nurl
+update-urls +packages='all':
+    #!/usr/bin/env fish
 
-# Usage: just show-path <package>
-show-path package:
-    @echo "Store path for {{ package }}:"
-    nix build .#{{ package }} --no-out-link
+    set pattern
+    set rebuild
+
+    if test "{{ packages }}" != "all"
+        set glob (string join "," {{ packages }})
+        set pattern --glob="*{$glob}*"
+    end
+
+    # Find all .nix files in pkgs/ that contain fetchFromGitHub
+    set -l nix_files (rg -l --color=never --sort=path --type nix "fetchFromGitHub" $pattern pkgs/)
+
+    for file in $nix_files
+
+        # Extract homepage URL from the file
+        set -l github_url (rg 'homepage = "([^"]+)"' $file -o --replace '$1' --no-line-number --color=never)
+        set -l package (rg 'pname = "([^"]+)"' $file -o --replace '$1' --no-line-number --color=never)
+
+        if test -n "$github_url"
+
+            echo -n "Checking $package..."
+
+            # Get the new hash using nurl
+            set -l nurl_output ($HOME/.cargo/bin/nurl --json $github_url 2>&1)
+            set -l nurl_status $status
+
+            if test $nurl_status -eq 0
+                # Extract just the JSON part from nurl output (everything after the last space)
+                set -l json_part (echo $nurl_output | awk '{print $NF}')
+
+                # Extract the hash and rev from nurl JSON output
+                set -l new_hash (echo $json_part | jq -r '.args.hash' 2>/dev/null)
+                set -l new_rev (echo $json_part | jq -r '.args.rev' 2>/dev/null)
+
+                if test -n "$new_hash" -a -n "$new_rev"
+                    # Get current hash and rev from file
+                    set -l current_hash (rg '\bhash = "([^"]+)"' $file -o --replace '$1' --no-line-number --color=never)
+                    set -l current_rev (rg '\brev = "([^"]+)"' $file -o --replace '$1' --no-line-number --color=never)
+
+                    if test $new_hash != $current_hash; or test $new_rev != $current_rev
+                        set -l updated true
+
+                        sd --fixed-strings "$current_hash" "$new_hash" "$file"
+                        sd --fixed-strings "$current_rev" "$new_rev" "$file"
+
+                        # Clear cargoHash if it's there.
+                        sd 'cargoHash = "[^"]*"' 'cargoHash = ""' "$file"
+
+                        set -a rebuild $package
+
+                        echo "...updated!"
+                    else
+                        echo "...no changes needed."
+                    end
+                else
+                    echo
+                    echo "   Could not extract hash/rev from nurl output for $file"
+                    echo "  Debug: nurl output was: $nurl_output"
+                    exit 1
+                end
+            else
+                echo
+                echo "   nurl failed for $github_url (exit code: $nurl_status)"
+                echo "  Debug: nurl output was: $nurl_output"
+                exit 1
+            end
+        else
+            echo
+            echo "   Could not extract homepage URL from $file"
+        end
+    end
+
+    if test (count $rebuild) -gt 0
+        echo
+        echo "Run: just build" (string join " " $rebuild)
+    end
