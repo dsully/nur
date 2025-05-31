@@ -15,12 +15,12 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "astral-sh";
     repo = "ruff";
-    rev = "62ef96f";
-    hash = "sha256-X+w8qxbnLMW9OekTojK5At/gP5VTF5UBuxElJAT7ajI=";
+    rev = "aa1fad61e0f9fe0c7faac876f2ef55cd3817fc6c";
+    hash = "sha256-gAvtWOC2aQbqDNjOk7UUGXV/0TfdIXdrxTWH1lq7+fs=";
   };
 
   cargoBuildFlags = ["--package=ty"];
-  cargoHash = "sha256-pYv99huRgqcFcnkMkfFoejmZmVkb9q/VVlYfylPXo4o=";
+  cargoHash = "sha256-7wTJzHyrcz1V9FKRYPyhmaj4160gtXv1fsDH3q32vJ0=";
 
   doCheck = false;
   nativeBuildInputs = [installShellFiles];
@@ -43,7 +43,7 @@ rustPlatform.buildRustPackage rec {
 
   meta = {
     description = "Extremely fast Python type checker and language server, written in Rust";
-    homepage = "https://github.com/astral-sh/ty";
+    homepage = "https://github.com/astral-sh/ruff";
     changelog = "https://github.com/astral-sh/ty/blob/${version}/CHANGELOG.md";
     license = lib.licenses.mit;
     mainProgram = "ty";

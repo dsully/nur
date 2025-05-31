@@ -1,23 +1,22 @@
 {
   lib,
-  pkgs,
   fetchFromGitHub,
   rustPlatform,
   ...
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "dirstat-rs";
-  version = "v0.3.7";
+  version = "v0.3.8";
 
   src = fetchFromGitHub {
     owner = "scullionw";
-    repo = pname;
+    repo = "dirstat-rs";
     rev = "607c2b797078d71eac8a414fa04b46539f5323d1";
-    sha256 = "sha256-gDIUYhc+GWbQsn5DihnBJdOJ45zdwm24J2ZD2jEwGyE=";
+    hash = "sha256-oUeDGNKnPmaEYjbhsNeKeqtn5a/js7U2WzUKcn3MRxM=";
   };
 
   useFetchCargoVendor = true;
-  cargoHash = "sha256-SdxTiIrsK3U4mcrcilOhMkkp12yEUkWlXmlT+C75dZw=";
+  cargoHash = "sha256-LxUSgIl8r/hWU24CBBBkJXxIodVouxyZb0Dsjic/z0o=";
 
   meta = with lib; {
     description = "Fast, cross-platform disk usage CLI";

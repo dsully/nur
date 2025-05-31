@@ -12,11 +12,11 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "amrit110";
     repo = "oli";
-    rev = "7aff185dc42091633dd63da142c5deaa4b7996db";
-    hash = "sha256-mhGdv577EzkQ2Z44iR+qsIBLYn9mhTWS8HL5ZUqZFB4=";
+    rev = "ae34bea73795959c2e26c337ece2cfffe5ec5f5f";
+    hash = "sha256-ILjl/y8HBjaN+1dK3x0LZ5jDe4NBW8kHVcp7D+TO6WY=";
   };
 
-  cargoHash = "sha256-KP0rmrU+RUmyK1HGf/QMI8ZJpL/1WTaEu737q9dx0Rc=";
+  cargoHash = "sha256-KHTaMG9k5G4Fh9gindqGBZ0J2wRNCaGet2NXNTV01IE=";
   useFetchCargoVendor = true;
   doCheck = false;
 

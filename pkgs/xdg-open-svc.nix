@@ -12,10 +12,10 @@ buildGoModule rec {
     owner = "caarlos0";
     repo = "xdg-open-svc";
     rev = "65283ef6cd6ac632a749d41b5822e7d832733555";
-    sha256 = "sha256-YCKiM/J76ajMCj15vtTtvCq51Whfv05Fw+4ebJgVMjY=";
+    hash = "sha256-YCKiM/J76ajMCj15vtTtvCq51Whfv05Fw+4ebJgVMjY=";
   };
 
-  vendorHash = "";
+  vendorHash = "sha256-2E2++3AHJmt3Srsz5yBYK0R0GCjG9ITn35y/XDyOboE=";
 
   ldflags = ["-s" "-w" "-X=main.version=${version}" "-X=main.builtBy=nixpkgs"];
 

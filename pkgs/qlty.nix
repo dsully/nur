@@ -19,8 +19,8 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "qltysh";
     repo = "qlty";
-    rev = "8c93f9b7691b3128c48bb036d7ddd5124ea901f0";
-    hash = "sha256-VzpeVZ6wpfLSuQC5KVScEZK8C4dOIFeYNQfw/q20bIE=";
+    rev = "7b099c5070c87ce3d4296a07b7e8ab5199413907";
+    hash = "sha256-UfiPMu+0vUCY+iEztH3nIHCdY4C8YWq7lhYCCiKZfgA=";
   };
 
   doCheck = false;

@@ -15,11 +15,11 @@ then
     src = fetchFromGitHub {
       owner = "haukesomm";
       repo = "apple-photos-export";
-      rev = "951c354984c8b05c46c87866e3a46267b7c6b391";
-      hash = "sha256-ek2euDo61q9ICduJng3rSyB4cvJVSjTX9E2elk/3q6c=";
+      rev = "9a7634c14b3ea12f410dc912d55afcd6db831bea";
+      hash = "sha256-bkdf91H9kPwEN3cU8e65XQT9/PhO4kpP1lqOLv6E63Y=";
     };
 
-    cargoHash = "sha256-bsPR/1y5dUnuC785H/p5A3hbFZ1oPiBtZNgx/vrszbs=";
+    cargoHash = "sha256-1oqtnfqMSYTjCuAF/PNJ6I4LbfxzksGoSVmnCWNcMiQ=";
     useFetchCargoVendor = true;
     doCheck = false;
 
