@@ -37,7 +37,6 @@ in {
     oli
     pkl-lsp
     pyproject-fmt
-    # qlty
     reading-list-to-pinboard-rs
     safari-rs
     sith-language-server
