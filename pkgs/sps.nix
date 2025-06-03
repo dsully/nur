@@ -10,16 +10,16 @@ if stdenv.isDarwin
 then
   rustPlatform.buildRustPackage {
     pname = "sps";
-    version = "0.1.55.1";
+    version = "0.1.56";
 
     src = fetchFromGitHub {
       owner = "alexykn";
       repo = "sps";
-      rev = "aa1b4feac8cc60726b512d103f73b56b031d0302";
-      hash = "sha256-DWRyhG363wNxtN6ezCEdp5eSSK+mECuQVdnUNKJ0Sdc=";
+      rev = "45b3d2a20e6c07ce23e3355639af16939777ba8c";
+      hash = "sha256-KG+7fWuCTW9u5AdD2YdJetbQStr1/Uj/8WIjTOEKT4E=";
     };
 
-    cargoHash = "sha256-fM2ckEODEdPQTVfwjpZz/3KckeexGZXHN2vUjtuI2Ag=";
+    cargoHash = "sha256-Yn6N9drCaGjY/Z/C0jRxX9H3+BriOZhEO3klSd3EDMs=";
     useFetchCargoVendor = true;
     doCheck = false;
 

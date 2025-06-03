@@ -32,6 +32,7 @@ init-from-url URL:
 
 # Build a package or all packages
 #
+
 # Usage: just build [package]
 build +packages='all':
     #!/usr/bin/env fish
@@ -47,7 +48,7 @@ build +packages='all':
 
     mkdir -p build-results
 
-    set NIXPKGS_ALLOW_UNFREE 1 
+    set NIXPKGS_ALLOW_UNFREE 1
 
     # Build each package and log results
     for file in $files
@@ -119,7 +120,7 @@ update-urls +packages='all':
             echo -n "Checking $package..."
 
             # Get the new hash using nurl
-            set -l nurl_output ($HOME/.cargo/bin/nurl --json $github_url 2>&1)
+            set -l nurl_output (nurl --json $github_url 2>&1)
             set -l nurl_status $status
 
             if test $nurl_status -eq 0
