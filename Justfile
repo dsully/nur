@@ -95,7 +95,7 @@ clean:
     @mkdir -p {{ output_dir }}
 
 # Update all package URLs using nurl
-update-urls +packages='all':
+update-urls +packages='all': up
     #!/usr/bin/env fish
 
     set pattern

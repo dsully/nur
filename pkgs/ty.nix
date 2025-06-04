@@ -15,8 +15,8 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "astral-sh";
     repo = "ruff";
-    rev = "8d98c601d8fb0c7fafe503c6fa22427357eb5080";
-    hash = "sha256-GEjsZdWsRrNyEx0tPko6ULvzapDYGpHWcf2VueWzW3Y=";
+    rev = "0079cc6817d070ff42bfc568c6652e260485983b";
+    hash = "sha256-j+vWB01yI1Mlg5c+/WD429nyI0idtd28w5wYMlPl08Y=";
   };
 
   cargoBuildFlags = ["--package=ty"];
@@ -25,6 +25,8 @@ rustPlatform.buildRustPackage rec {
   doCheck = false;
   nativeBuildInputs = [installShellFiles];
   useFetchCargoVendor = true;
+
+  env.TY_VERSION = version;
 
   postInstall = lib.optionalString (stdenv.hostPlatform.emulatorAvailable buildPackages) (
     let
