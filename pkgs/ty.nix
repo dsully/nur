@@ -15,12 +15,12 @@ rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "astral-sh";
     repo = "ruff";
-    rev = "0079cc6817d070ff42bfc568c6652e260485983b";
-    hash = "sha256-j+vWB01yI1Mlg5c+/WD429nyI0idtd28w5wYMlPl08Y=";
+    rev = "e658778cedc25051ec7f6aa6bc243bbc446fe416";
+    hash = "sha256-GUQGsvvuDlWAwLKhHF304P2q6RyLwGTnzzXM2KN1YZs=";
   };
 
   cargoBuildFlags = ["--package=ty"];
-  cargoHash = "sha256-XISRy7Ncy0lTlsCFYmJBcgGiDJfdygTDF4f9O9ZlzDU=";
+  cargoHash = "sha256-UKfT3KE80mwkEx8ytGnrpGHhsAiLYQ/d2zGuMcesKAM=";
 
   doCheck = false;
   nativeBuildInputs = [installShellFiles];
@@ -48,6 +48,7 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://github.com/astral-sh/ruff";
     changelog = "https://github.com/astral-sh/ty/blob/${version}/CHANGELOG.md";
     license = lib.licenses.mit;
-    mainProgram = "ty";
+    version = version;
+    mainProgram = pname;
   };
 }
