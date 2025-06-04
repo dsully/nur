@@ -9,13 +9,14 @@
   ...
 }:
 rustPlatform.buildRustPackage rec {
+  rev = "e658778cedc25051ec7f6aa6bc243bbc446fe416";
   pname = "ty";
-  version = "0.0.1-alpha.8";
+  version = "0.0.1-alpha.8-${rev}";
 
   src = fetchFromGitHub {
+    inherit rev;
     owner = "astral-sh";
     repo = "ruff";
-    rev = "e658778cedc25051ec7f6aa6bc243bbc446fe416";
     hash = "sha256-GUQGsvvuDlWAwLKhHF304P2q6RyLwGTnzzXM2KN1YZs=";
   };
 
