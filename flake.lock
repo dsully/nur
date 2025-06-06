@@ -35,11 +35,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1748818459,
-        "narHash": "sha256-xJRlZPn/VfomubpCFKnSNHdyQ5rEyYsBBqQlkfa/JhY=",
+        "lastModified": 1749148067,
+        "narHash": "sha256-XG+UqTZ5MX6UzyvdcD0otuWWM591WmoZJWF+uJ1VgyU=",
         "owner": "baileyluTCD",
         "repo": "bun2nix",
-        "rev": "345018e0b801d2ffa7de89bf0d83d4f3a1e084bc",
+        "rev": "9456f850aefbc607feef4d91861c5df8344d0a47",
         "type": "github"
       },
       "original": {
