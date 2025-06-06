@@ -15,8 +15,8 @@ then
     src = fetchFromGitHub {
       owner = "alexykn";
       repo = "sps";
-      rev = "45b3d2a20e6c07ce23e3355639af16939777ba8c";
-      hash = "sha256-KG+7fWuCTW9u5AdD2YdJetbQStr1/Uj/8WIjTOEKT4E=";
+      rev = "7c9de4e2c897944dc23e8b9e03410060e3445af8";
+      hash = "sha256-50BpBvD7Ire6KPgvEBqquw00gDxZh9Adjgslb3WDk8M=";
     };
 
     cargoHash = "sha256-Yn6N9drCaGjY/Z/C0jRxX9H3+BriOZhEO3klSd3EDMs=";
