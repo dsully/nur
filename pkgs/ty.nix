@@ -9,7 +9,7 @@
   ...
 }:
 rustPlatform.buildRustPackage rec {
-  rev = "6e785867c3a97691972e8a49c372b3effba90032";
+  rev = "72552f31e40577f32195624279ead0a5364a82e0";
   pname = "ty";
   version = "0.0.1-alpha.8-${rev}";
 
@@ -17,7 +17,7 @@ rustPlatform.buildRustPackage rec {
     inherit rev;
     owner = "astral-sh";
     repo = "ruff";
-    hash = "sha256-syw2YQ9qkBymxdrAd/2rMcmRSw88OwZ5S3fSYCcxcfw=";
+    hash = "sha256-drPRU92h3DSmDLef1/ku6XZ85ccrlVsp/I83uAjJP24=";
   };
 
   cargoBuildFlags = ["--package=ty"];
