@@ -1,8 +1,8 @@
 name: "Update Flake Lock"
 on:
-  schedule:
-    # Update at 8:30am UTC daily
-    - cron: '30 8 * * *'
+  # schedule:
+  #   # Update at 8:30am UTC daily
+  #   - cron: '30 8 * * *'
   workflow_dispatch:
 
 permissions:
